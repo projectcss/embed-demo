@@ -1,10 +1,5 @@
-/**
- * @file 嵌入sdk代码入口 - lite模式
- * @auth FranckChen(chenfan02@baidu.com)
- */
-
 const styles = `
-  .appbuilder-bubbleItem {
+  .app-bubbleItem {
      width:40px;
      height:40px;
      display:flex;
@@ -19,12 +14,12 @@ const styles = `
      background: #fff;
      box-shadow: 0 4px 8px 0 rgba(7,12,20,0.16);
   }
-  .appbuilder-bubbleImage {
+  .app-bubbleImage {
      width: 38px;
      height: 38px;
      border-radius: 50%;
   }
-  .appbuilder-bubbleContent {
+  .app-bubbleContent {
       width:min(400px,90vw);
       height:calc(100% - 32px);
       min-height:400px;
@@ -39,13 +34,13 @@ const styles = `
       display: flex;
       flex-direction: column;
   }
- .appbuilder-bubbleIfream {
+ .app-bubbleIfream {
      width:100%;
      border:none;
      flex: 1;
      border-radius: 12px;
   }
-  .appbuilder-bubbleContentHeader {
+  .app-bubbleContentHeader {
      box-sizing: border-box;
      position:absolute;
      top:10px;
@@ -54,12 +49,12 @@ const styles = `
      align-items: center;
      flex-direction: row-reverse;
   }
-  .appbuilder-closeIcon {
+  .app-closeIcon {
      font-size: 16px;
      color: #151b26;
      cursor:pointer;
   }
-  .appbuilder-disabled-tooltip {
+  .app-disabled-tooltip {
      bottom:188px;
      right:60px;
      position:fixed;
@@ -95,7 +90,7 @@ class EmbedLiteSDK {
     bubbleTooltipId: string = 'embed-lite-bubble-tooltip';
 
     /** 气泡div id:  */
-    bubbleConversationId: string = 'appbuilder-conversation';
+    bubbleConversationId: string = 'app-conversation';
 
     /** 是否已渲染对话窗口 */
     isRenderConversation: boolean = false;
@@ -216,8 +211,8 @@ class EmbedLiteSDK {
     /** 创建气泡顶部html */
     private readonly createHeaderDOM = (): ChildNode | null => {
         const htmlString = `
-        <div class="appbuilder-bubbleContentHeader">
-            <span class="appbuilder-closeIcon" id="appbuilder-closeIcon">
+        <div class="app-bubbleContentHeader">
+            <span class="app-closeIcon" id="app-closeIcon">
                 <svg width="16" height="16">
                     <path d="m12.596 3.404-9.192 9.193m9.192-.001L3.403 3.404" fill="none" stroke="currentColor" stroke-linecap="round" />
                 </svg>
@@ -301,13 +296,13 @@ class EmbedLiteSDK {
         const divContent = document.createElement('div');
         divContent.id = this.bubbleConversationId;
 
-        divContent.setAttribute('class', 'appbuilder-bubbleContent');
+        divContent.setAttribute('class', 'app-bubbleContent');
 
         // 创建 iframe 元素
         const iframe = document.createElement('iframe');
 
         // 设置 iframe 样式，宽度、高度等
-        iframe.setAttribute('class', 'appbuilder-bubbleIfream');
+        iframe.setAttribute('class', 'app-bubbleIfream');
         iframe.allow = 'microphone;autoplay';
 
         iframe.src = 'https://cn.vite.dev/guide/';
@@ -323,7 +318,7 @@ class EmbedLiteSDK {
         // 将 气泡 添加到页面中
         document.body.append(divContent);
 
-        const closeIcon = document.querySelector('#appbuilder-closeIcon');
+        const closeIcon = document.querySelector('#app-closeIcon');
 
         if (closeIcon) {
             closeIcon.addEventListener('click', () => {
@@ -347,9 +342,9 @@ class EmbedLiteSDK {
 
         img.setAttribute('src', this.shareDefaultImage);
 
-        img.setAttribute('class', 'appbuilder-bubbleImage');
+        img.setAttribute('class', 'app-bubbleImage');
 
-        divContent.setAttribute('class', 'appbuilder-bubbleItem');
+        divContent.setAttribute('class', 'app-bubbleItem');
 
         // 将 iframe 添加到页面中
         divContent.append(img);
@@ -364,14 +359,7 @@ class EmbedLiteSDK {
         divContent.id = this.bubbleTooltipId;
         divContent.textContent = '暂无访问权限，请完成网站配置后刷新重试';
 
-        const aLink: HTMLAnchorElement = document.createElement('a');
-        aLink.href = 'https://console.bce.baidu.com/ai_apaas/app';
-        aLink.target = '_blank';
-        aLink.style.display = 'block';
-        aLink.textContent = '前往千帆AppBuilder';
-
-        divContent.append(aLink);
-        divContent.setAttribute('class', 'appbuilder-disabled-tooltip');
+        divContent.setAttribute('class', 'app-disabled-tooltip');
 
         // 将 气泡 添加到页面中
         document.body.append(divContent);
