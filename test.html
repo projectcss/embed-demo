@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <title>小浮窗版测试站点</title>
+</head>
+
+<body>
+    <script src="./output/sdk.js"></script>
+    <!-- vite的仅对html entry中的type=module的文件进行编译, 因此以module的形式加在引入sdk,  -->
+    <!-- module默认defer加载, 为了保证SDK正常使用, 调用SDK的代码也使用module加载 -->
+    <script>
+        console.log(window.EmbedLiteSDK);
+        new window.EmbedLiteSDK({ appId: '1f945497-a578-4756-8643-35ca20f19e12', code:'embed1wwYY2ZmUfQWZPKXPwrB' });
+    </script>
+</body>
+
+</html>
